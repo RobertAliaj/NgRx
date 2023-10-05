@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {CommonModule} from '@angular/common';
 
 import {SharedModule} from '../shared/shared.module';
 
@@ -10,6 +11,8 @@ import {ProductEditComponent} from './product-edit/product-edit.component';
 /* NgRx */
 import {StoreModule} from '@ngrx/store';
 import {productReducer} from './state/product.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {ProductsEffects} from './state/products.effects';
 
 const productRoutes: Routes = [
   {path: '', component: ProductShellComponent}
@@ -18,8 +21,10 @@ const productRoutes: Routes = [
 @NgModule({
   imports: [
     SharedModule,
+    CommonModule,
     RouterModule.forChild(productRoutes),
-    StoreModule.forFeature('products', productReducer)
+    StoreModule.forFeature('products', productReducer),
+    EffectsModule.forFeature([ProductsEffects])
   ],
   declarations: [
     ProductShellComponent,
