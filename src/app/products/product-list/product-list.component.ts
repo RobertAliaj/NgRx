@@ -26,14 +26,13 @@ export class ProductListComponent implements OnInit {
     //TODO unsubscribe
     this.products$ = this.store.select(getProducts);
 
-    this.store.dispatch(ProductActions.loadProducts());
+    this.errorMessage$ = this.store.select(getError);
 
+    this.store.dispatch(ProductActions.loadProducts());
 
     this.selectedProduct$ = this.store.select(getCurrentProduct);
 
     this.displayCode$ = this.store.select(getShowProductCode);
-
-    this.errorMessage$ = this.store.select(getError);
   }
 
   checkChanged(): void {
@@ -45,7 +44,7 @@ export class ProductListComponent implements OnInit {
   }
 
   productSelected(product: Product): void {
-    this.store.dispatch(ProductActions.setCurrentProduct({product}));
+    this.store.dispatch(ProductActions.setCurrentProduct({ currentProductId: product.id }));
   }
 
 }

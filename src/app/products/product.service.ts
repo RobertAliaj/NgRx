@@ -22,7 +22,6 @@ export class ProductService {
       );
   }
 
-
   createProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     // Product Id must be null for the Web API to assign an Id
