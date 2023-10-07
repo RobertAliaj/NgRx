@@ -34,7 +34,7 @@ export class ProductEditComponent implements OnInit {
               private productService: ProductService,
               private store: Store<State>) {
 
-    // Defines all of the validation messages for the form.
+    // Defines all the validation messages for the form.
     // These could instead be retrieved from a file or database.
     this.validationMessages = {
       productName: {
@@ -127,21 +127,18 @@ export class ProductEditComponent implements OnInit {
   saveProduct(originalProduct: Product): void {
     if (this.productForm.valid) {
       if (this.productForm.dirty) {
-        // Copy over all of the original product properties
+        // Copy over all the original product properties
         // Then copy over the values from the form
-        // This ensures values not on the form, such as the Id, are retained
+        // This ensures values not on the form, such as the ID, are retained
         const product = {...originalProduct, ...this.productForm.value};
 
         if (product.id === 0) {
           this.productService.createProduct(product).subscribe({
-            next: p => this.store.dispatch(ProductActions.setCurrentProduct({ currentProductId: p.id })),
+            next: p => this.store.dispatch(ProductActions.setCurrentProduct({currentProductId: p.id})),
             error: err => this.errorMessage = err
           });
         } else {
-          this.productService.updateProduct(product).subscribe({
-            next: p => this.store.dispatch(ProductActions.setCurrentProduct({ currentProductId: p.id })),
-            error: err => this.errorMessage = err
-          });
+          this.store.dispatch(ProductActions.updateProduct({product}));
         }
       }
     }

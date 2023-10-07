@@ -15,10 +15,10 @@ export class ProductListComponent implements OnInit {
   pageTitle = 'Products';
 
   products$: Observable<Product[]>;
-  selectedProduct$: Observable<Product>;
   displayCode$: Observable<boolean>;
   errorMessage$: Observable<string>;
 
+  selectedProduct$: Observable<Product>;
   constructor(private store: Store<State>) {
   }
 
